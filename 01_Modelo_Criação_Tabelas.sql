@@ -1,6 +1,6 @@
 
 
---- 01. Criação da Tabela Temporaria - dbo.ttp_riscos_baixados.
+--- 01. CriaÃ§Ã£o da Tabela Temporaria - dbo.ttp_riscos_baixados.
 
 IF (NOT EXISTS (select * from INFORMATION_SCHEMA.TABLES 
               where TABLE_SCHEMA = 'dbo'
@@ -30,7 +30,7 @@ End
 
 Go
 
---- 02. Criação da Tabela Definitiva - dbo.tgr_riscos_baixados
+--- 02. CriaÃ§Ã£o da Tabela Definitiva - dbo.tgr_riscos_baixados
 
 IF (NOT EXISTS (select * from INFORMATION_SCHEMA.TABLES 
               where TABLE_SCHEMA = 'dbo'
