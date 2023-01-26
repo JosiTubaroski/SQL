@@ -1,5 +1,5 @@
 
---- Caso o campo n„o exista o campo na tabela ent„o ser· adicionado
+--- Caso o campo n√£o exista o campo na tabela ent√£o ser√° adicionado
 
  If not exists (Select top 1 T.name AS Tabela,C.name AS Coluna
                 from sys.sysobjects as T (nolock)
