@@ -1,4 +1,4 @@
 
 #Procedure_Verifica_MovAltosValores
 
-A procedure realiza a analise de Movimentação de Altos valores realizadas em determinada Data
+A procedure realiza a analise se determinado cliente ultrapassou o Limite de Movimentação realizada em determinada Data
