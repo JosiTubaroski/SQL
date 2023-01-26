@@ -6,3 +6,6 @@
   
  * 03_Add_Campos
    - Incluindo campos em tabelas que já exite
+   
+ * 04_Criar_View
+   - Script que apresenta um modelo de criação de Views
