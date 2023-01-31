@@ -1,5 +1,5 @@
 
---- CriaÁ„o da Procedure que verifica 9 (D) - Compra/Venda entre mesmas contrapartes (Master e Dependentes)
+--- Cria√ß√£o da Procedure que verifica 9 (D) - Compra/Venda entre mesmas contrapartes (Master e Dependentes)
 --- 'spcr_mesma_cp_master_dependente'
 
 if exists(select name from sys.procedures where name = 'spcr_mesma_cp_master_dependente') 
@@ -63,7 +63,7 @@ begin try
     where a.cd_cliente = @cd_cliente
     and cd_master is not null
 
---- 03. Realizar a verificaÁ„o de compras realizadas pelo Cliente Master no periodo analisado
+--- 03. Realizar a verifica√ß√£o de compras realizadas pelo Cliente Master no periodo analisado
 
       if object_id('tempdb..#ttp_compra_master') is not null 	
 		drop table #ttp_compra_master;
@@ -91,7 +91,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
          and dc_operacao = 'C'
          and ope.dt_ordem between @dt_anterior and @dt_inicio  
 
---- 04. Realizar a verificaÁ„o de vendas realizadas pelos Dependentes Master no periodo analisado
+--- 04. Realizar a verifica√ß√£o de vendas realizadas pelos Dependentes Master no periodo analisado
 
      if object_id('tempdb..#ttp_venda_dependentes') is not null 	
 	  drop table #ttp_venda_dependentes; 
@@ -117,7 +117,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
            and dc_operacao = 'V'
            and ope.dt_ordem between @dt_anterior and @dt_inicio
 
---- 05. Juntando as operaÁıes de compra e venda em que seja mesmo ativo, mesma quantidade e valor negocios diferentes
+--- 05. Juntando as opera√ß√µes de compra e venda em que seja mesmo ativo, mesma quantidade e valor negocios diferentes
 
      if object_id('tempdb..#ttp_alerta_parte1') is not null 	
 	  drop table #ttp_alerta_parte1; 
@@ -163,7 +163,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
 
      Begin
 
---- 06. Caso a condiÁ„o do alerta parte 1 seja verdadeira, verificar se teve outra incidencia no periodo de 30 dias
+--- 06. Caso a condi√ß√£o do alerta parte 1 seja verdadeira, verificar se teve outra incidencia no periodo de 30 dias
 
          declare @30dias int = 30
          declare @dt_anterior_mes datetime
@@ -222,7 +222,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
                and dc_operacao = 'V'
                and ope.dt_ordem between @dt_anterior_mes and @dt_inicio 
 
- ---- 08. Verificar a segunda condiÁ„o do alerta
+ ---- 08. Verificar a segunda condi√ß√£o do alerta
 
       if object_id('tempdb..#ttp_alerta_parte2') is not null 	
 	      drop table #ttp_alerta_parte2; 
@@ -264,7 +264,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
      and cm.qt_negocio =  vd.qt_negocio
      and cm.vl_negocio <> vd.vl_negocio
 
----- 09. Verifica se entra na condiÁ„o da geraÁ„o do alerta 
+---- 09. Verifica se entra na condi√ß√£o da gera√ß√£o do alerta 
 
         exec @cd_unico = dbo.spgr_inserir_relac_produto_unico @cd_produto,
         @cd_enquadramento, @vl_parametro1;
@@ -290,7 +290,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
  	         
         Begin
          
---- 10. Inserir Alerta caso n„o exista na tabela de alertas
+--- 10. Inserir Alerta caso n√£o exista na tabela de alertas
 
          insert into dbo.tgr_alertas  
          (cd_cliente,       -- 01. cd_cliente          -- 01. @cd_cliente
@@ -298,7 +298,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
           cd_enquadramento, -- 03. cd_enquadramento    -- 03. @cd_enquadramento
           id_selecionado,   -- 04. id_selecionado      -- 04. 0   
           id_automatica,    -- 05. id_automatico       -- 05. @id_automatica 
-          cd_usuario,       -- 06. cd_usu·rio          -- 06. @cd_usuario   
+          cd_usuario,       -- 06. cd_usu√°rio          -- 06. @cd_usuario   
           cd_status_atual,  -- 07. cd_status_suspeita  -- 07. @cd_status_suspeita    
           dt_alteracao,     -- 08. dt_alteracao        -- 08. getdate()  
           dt_movimentacao,  -- 09. dt_movimentacao     -- 09. dt_movimentacao
@@ -325,7 +325,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
          @cd_enquadramento,      -- 03. cd_enquadramento    -- 03. @cd_enquadramento
          0,                      -- 04. id_selecionado      -- 04. 0
          @id_automatica,         -- 05. id_automatico       -- 05. @id_automatica 
-         @cd_usuario,            -- 06. cd_usu·rio          -- 06. @cd_usuario  
+         @cd_usuario,            -- 06. cd_usu√°rio          -- 06. @cd_usuario  
          @cd_status_suspeita,    -- 07. cd_status_suspeita  -- 07. @cd_status_suspeita   
          getdate(),              -- 08. dt_alteracao        -- 08. getdate() 
          @dt_inicio,             -- 09. dt_movimentacao     -- 09. dt_movimentacao
@@ -348,7 +348,7 @@ select @dt_anterior = (Select dbo.fncDia_Util_Anterior (@dt_inicio, @vl_parametr
          @vl_isencao             -- 26. vl_isencao          -- 26. @vl_isencao 
          from #ttp_alerta_parte2 alp2
 
---- 11. Incluindo as movimentaÁıes do alerta Primeira Parte
+--- 11. Incluindo as movimenta√ß√µes do alerta Primeira Parte
 
 					set @cd_alerta = scope_identity()
 					
