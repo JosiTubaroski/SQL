@@ -1,7 +1,7 @@
 
 EXEC SP_SRVROLEPERMISSION 'bulkadmin'
 
--- CriaÁ„o de um banco para nossos testes
+-- Cria√ß√£o de um banco para nossos testes
 CREATE DATABASE RoleTest
 GO
 
@@ -17,31 +17,31 @@ descricao VARCHAR(100) NULL)
 
 select * from dbo.Roles
 
--- CriaÁ„o dos logins para teste
+-- Cria√ß√£o dos logins para teste
 USE MASTER
 GO
--- Esse cara foi eleito BulkAdmin pela comiss„o oficial dos databases do brasil
+-- Esse cara foi eleito BulkAdmin pela comiss√£o oficial dos databases do brasil
 CREATE LOGIN CarinhaBulkAdmin WITH PASSWORD = 'bulkadmin1', CHECK_POLICY = OFF;
 
--- Adiciona o login ‡ role Bulkadmin
+-- Adiciona o login √† role Bulkadmin
 EXEC sp_addsrvrolemember 'CarinhaBulkAdmin', 'bulkadmin';
 
---Esse cara ter· permiss„o de inserÁ„o e nada mais (nem arquivo externo)
+--Esse cara ter√° permiss√£o de inser√ß√£o e nada mais (nem arquivo externo)
 CREATE LOGIN CarinhaDoInsert WITH PASSWORD = 'insert1', CHECK_POLICY = OFF;
 
-/* Criando usu·rios para ambos os logins na base */
+/* Criando usu√°rios para ambos os logins na base */
 
 USE RoleTest
 
 EXEC sp_addsrvrolemember CarinhaDoInsert, 'bulkadmin'
 
---O usu·rio foi criado. Lembrando: ele tem role de servidor Bulkadmin
+--O usu√°rio foi criado. Lembrando: ele tem role de servidor Bulkadmin
 CREATE USER usrBulkInsert FOR LOGIN CarinhaBulkAdmin
 
--- O usu·rio que sÛ pode inserir e n„o pode fazer bulk insert
+-- O usu√°rio que s√≥ pode inserir e n√£o pode fazer bulk insert
 CREATE USER usrInsert FOR LOGIN CarinhaDoInsert
 
--- Ou seja...O ˙nico que tem permiss„o de Insert È o usrInsert
+-- Ou seja...O √∫nico que tem permiss√£o de Insert √© o usrInsert
 GRANT INSERT ON Object::dbo.Roles TO usrInsert
 
 GRANT select ON Object::dbo.Roles TO usrBulkInsert
@@ -51,8 +51,8 @@ GRANT select ON Object::dbo.Roles TO usrBulkInsert
 USE RoleTest
 GO
 -- Insert deve funcionar normalmente.
-INSERT INTO dbo.Roles (linha,nome,descricao) VALUES (0,'bulkadm','ComeÁo de teste')
--- Agora tente dar um BULK INSERT sem ter permiss„o...
+INSERT INTO dbo.Roles (linha,nome,descricao) VALUES (0,'bulkadm','Come√ßo de teste')
+-- Agora tente dar um BULK INSERT sem ter permiss√£o...
 BULK INSERT dbo.Roles 
 FROM 'C:\temp\carga.txt' WITH  (FIELDTERMINATOR = ',',   
 ROWTERMINATOR   = 'n')
