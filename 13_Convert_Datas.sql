@@ -48,7 +48,7 @@ from tb_teste_date
 update [dbo].[tb_teste_date]
 set dt_teste = '14042021'
 
---- Declarando variavel e utilizando convers„o de data no where
+--- Declarando variavel e utilizando convers√£o de data no where
 
 declare @dt_inicio smalldatetime = '2021-04-14' 
 
