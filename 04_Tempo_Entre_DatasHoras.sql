@@ -2,11 +2,11 @@
 DECLARE @dataInicial DATETIME = '2022-01-01';
 DECLARE @dataFinal DATETIME = '2023-01-01';
 
--- Calcule a diferença em dias
+-- Calcule a diferenÃ§a em dias
 DECLARE @diasPassados INT;
 SET @diasPassados = DATEDIFF(DAY, @dataInicial, @dataFinal);
 
--- Calcule a diferença em horas, minutos e segundos
+-- Calcule a diferenÃ§a em horas, minutos e segundos
 DECLARE @horasPassadas INT, @minutosPassados INT, @segundosPassados INT;
 SET @horasPassadas = DATEDIFF(HOUR, @dataInicial, @dataFinal);
 SET @minutosPassados = DATEDIFF(MINUTE, @dataInicial, @dataFinal);
